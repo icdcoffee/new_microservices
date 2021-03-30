@@ -14,6 +14,15 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: 'externalUrlResolver',
+      useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+        debugger;
+        return route.data.externalUrl;
+      }
+    }
+  ]
 })
 export class AppRoutingModule { }
