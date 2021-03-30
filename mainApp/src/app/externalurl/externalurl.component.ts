@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterState, RouterStateSnapshot, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    templateUrl: './externalurl.component.html',
-    providers: [ Router ]
+    templateUrl: './externalurl.component.html'
 })
 
 export class ExternalUrlComponent {
 
-    constructor(private router: Router) {
-        router.navigateByUrl('http://www.google.com');
+    constructor(router: Router, route: ActivatedRoute) {
+        window.location.href = route.snapshot.data['externalUrl'];
     }
 }
