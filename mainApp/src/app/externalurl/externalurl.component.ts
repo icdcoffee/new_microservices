@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
-    templateUrl: './externalurl.component.html',
-    providers: [ Router ]
+    templateUrl: './externalurl.component.html'
 })
 
 export class ExternalUrlComponent {
 
-    constructor(private router: Router) {
-        router.navigateByUrl('http://www.google.com');
+    externalUrl: SafeUrl;
+
+    constructor(route: ActivatedRoute, sanitizer: DomSanitizer) {
+        this.externalUrl = sanitizer.bypassSecurityTrustResourceUrl(route.snapshot.data['externalUrl']);
     }
 }
